@@ -151,3 +151,106 @@ Post
 Conversation
  ├── Participants
  └── Messages
+
+## 5. Ownership Rules
+
+| Entity | Owner Service |
+|----------|--------------|
+| User | Authentication |
+| Professional | Profiles |
+| Booking | Booking |
+| Payment | Payments |
+| Review | Reviews |
+| Post | Feed |
+| Message | Messaging |
+| Notification | Notifications |
+| Report | Trust & Safety |
+| Dispute | Trust & Safety |
+
+---
+
+## 6. Global Fields
+
+Every major entity should include standardized metadata where appropriate.
+
+```text
+id
+created_at
+updated_at
+created_by
+status
+version
+```
+
+This improves consistency across all services and simplifies auditing, debugging, and future migrations.
+
+---
+
+## 7. Data Lifecycle
+
+Every entity follows a predictable lifecycle.
+
+```text
+Created
+   ↓
+Updated
+   ↓
+Archived (when applicable)
+   ↓
+Soft Deleted (where supported)
+   ↓
+Retention Policy
+```
+
+Not every entity requires every lifecycle stage, but all services should follow the same lifecycle philosophy whenever applicable.
+
+---
+
+## 8. Scalability Principles
+
+Atlas follows these scalability principles:
+
+- Separate read-heavy and write-heavy workloads where appropriate.
+- Support future service decomposition without changing entity ownership.
+- Avoid cross-service database writes.
+- Prefer asynchronous communication for non-critical updates.
+- Design entities to support horizontal scaling.
+- Keep business logic outside the database schema.
+
+---
+
+## 9. Future Expansion
+
+The data model is intentionally designed to support future Atlas products without redesigning existing ownership boundaries.
+
+Future entities may include:
+
+- Atlas Capital
+- Atlas Card
+- Atlas Supply
+- Atlas Ads
+- Atlas Academy
+- Atlas API
+
+---
+
+## 10. Success Criteria
+
+A new engineer should be be able to determine:
+
+- where data belongs,
+- which service owns it,
+- how it relates to other entities,
+- how changes propagate through the platform.
+
+The document should remain the single source of truth for Atlas core data ownership.
+
+---
+
+# Appendix A
+
+Detailed Entity Relationship Diagrams (ERD) will be maintained in separate documentation and updated alongside implementation.
+
+This document defines concepts and ownership.
+
+The ER diagrams define physical relationships.
